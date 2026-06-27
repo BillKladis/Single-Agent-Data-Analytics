@@ -20,7 +20,7 @@ ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
 EXAMPLE_QUESTIONS = [
     "Which region is most profitable?",
     "Is discount hurting profit?",
-    "What's the sales trend over time?",
+    "Which category-region segments lose money?",
 ]
 
 
@@ -81,7 +81,13 @@ def main():
             ctx = browser.new_context(viewport={"width": 1400, "height": 900})
             page = ctx.new_page()
             page.goto(APP_URL, wait_until="networkidle", timeout=30000)
-            page.wait_for_timeout(3000)
+            # Wait out the dataset + agent cache_resource spinners on first load
+            try:
+                page.wait_for_selector("[data-testid='stSpinner']", state="hidden", timeout=60000)
+            except PlaywrightTimeout:
+                pass
+            page.wait_for_selector("button", timeout=30000)
+            page.wait_for_timeout(4000)
 
             # Screenshot 1: App loaded / example question view
             page.screenshot(
@@ -122,15 +128,15 @@ def main():
             )
             print("Saved 04_discount_profit.png")
 
-            # Screenshot 5: "What's the sales trend over time?"
+            # Screenshot 5: segment heatmap question (exercises new tool)
             print(f"Asking: {EXAMPLE_QUESTIONS[2]}")
             click_example(page, EXAMPLE_QUESTIONS[2])
             wait_for_answer(page)
             page.screenshot(
-                path=str(SCREENSHOTS_DIR / "05_sales_trend.png"),
+                path=str(SCREENSHOTS_DIR / "05_segment_heatmap.png"),
                 full_page=True,
             )
-            print("Saved 05_sales_trend.png")
+            print("Saved 05_segment_heatmap.png")
 
             browser.close()
 

@@ -1,0 +1,41 @@
+{
+  "langgraph": {
+    "label": "LangGraph ReAct",
+    "correct": 1.0,
+    "tool_f1": 0.9444444444444443,
+    "tool_recall": 0.9583333333333334,
+    "tool_precision": 0.9583333333333334,
+    "total_tokens": 6246.25,
+    "latency_s": 9.32,
+    "n_llm_calls": 2.0833333333333335,
+    "n_tool_calls": 1.1666666666666667,
+    "n_tasks": 12,
+    "accuracy": 1.0
+  },
+  "manual_react": {
+    "label": "Manual ReAct (raw SDK)",
+    "correct": 1.0,
+    "tool_f1": 0.9722222222222222,
+    "tool_recall": 0.9583333333333334,
+    "tool_precision": 1.0,
+    "total_tokens": 5893.666666666667,
+    "latency_s": 9.000000000000002,
+    "n_llm_calls": 2.0,
+    "n_tool_calls": 1.0,
+    "n_tasks": 12,
+    "accuracy": 1.0
+  },
+  "plan_execute": {
+    "label": "Plan-then-Execute",
+    "correct": 0.6666666666666666,
+    "tool_f1": 0.9444444444444443,
+    "tool_recall": 0.9583333333333334,
+    "tool_precision": 0.9583333333333334,
+    "total_tokens": 1362.3333333333333,
+    "latency_s": 11.435,
+    "n_llm_calls": 2.0,
+    "n_tool_calls": 1.0833333333333333,
+    "n_tasks": 12,
+    "accuracy": 0.6666666666666666
+  }
+}
